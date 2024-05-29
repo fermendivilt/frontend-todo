@@ -58,7 +58,7 @@ const NewToDoModal = async (props: PropsNewToDoModal): Promise<boolean> => {
         onSubmit={(e) => e.preventDefault()}
       >
         <label htmlFor="name" className="self-center">
-          To do's name
+          To do&apos;s name
         </label>
         <input
           type="text"
