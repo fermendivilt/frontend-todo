@@ -1,4 +1,16 @@
-export default function ToDoTable() {
+import React from "react";
+
+interface PropsToDoTable {
+  toDoArray: Array<ToDo>;
+  pageQuantity: number;
+  paginationPosition: number;
+  setTableOptions: React.Dispatch<React.SetStateAction<SearchOptions>>;
+}
+
+export default function ToDoTable(props: PropsToDoTable) {
+  const { toDoArray, pageQuantity, paginationPosition, setTableOptions } =
+    props;
+
   return (
     <>
       <div className="container flex flex-col mx-auto mb-4 items-center">
@@ -23,130 +35,55 @@ export default function ToDoTable() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
-            <tr>
-              <td className="border border-black p-4 py-2">
-                <input type="checkbox" name="" id="" />
-              </td>
-              <td className="border border-black p-4 py-2">
-                The Sliding Mr. Bones (Next Stop, Pottersville)
-              </td>
-              <td className="border border-black p-4 py-2">Malcolm Lockyer</td>
-              <td className="border border-black p-4 py-2">1961</td>
-              <td className="border border-black p-4 py-2">Edit/Delete</td>
-            </tr>
+            {toDoArray.map((toDo, index) => (
+              <tr key={index}>
+                <td className="border border-black p-4 py-2">
+                  <input type="checkbox" checked={toDo.isDone} />
+                </td>
+                <td className="border border-black p-4 py-2">{toDo.name}</td>
+                <td className="border border-black p-4 py-2">
+                  {toDo.priority}
+                </td>
+                <td className="border border-black p-4 py-2">
+                  {toDo.dueDate != null
+                    ? toDo.dueDate.substring(0, 10).replaceAll("-", "/")
+                    : "-"}
+                </td>
+                <td className="border border-black p-4 py-2">Edit/Delete</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
-      <div className="mx-auto mb-4 py-4 px-6 border border-black grid grid-cols-9 gap-4">
-        <button className="font-medium">{"<<"}</button>
-        <button className="font-medium">{"<"}</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-        <button className="font-medium">{">"}</button>
-        <button className="font-medium">{">>"}</button>
+      <div className="mx-auto mb-4 py-4 px-6 border border-black flex flex-col w-2/4">
+        <p className="mb-2 text-center">
+          You are in page: {paginationPosition}
+        </p>
+        <div className="flex align-middle justify-around">
+          <button className="font-medium">{"<"}</button>
+          <div className="flex justify-around overflow-x-auto">
+            {Array.from(Array(pageQuantity), (e, i) => {
+              return (
+                <button
+                  className="mx-4"
+                  key={i}
+                  onClick={() =>
+                    setTableOptions((prev) => {
+                      return {
+                        ...prev,
+                        pageNumber: i + 1,
+                      };
+                    })
+                  }
+                >
+                  {i + 1}
+                </button>
+              );
+            })}
+          </div>
+          <button className="font-medium">{">"}</button>
+        </div>
       </div>
     </>
   );

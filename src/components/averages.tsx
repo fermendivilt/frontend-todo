@@ -1,6 +1,6 @@
 export default function Averages() {
   return (
-    <div className="mx-auto w-full mb-4 p-4 border border-black grid grid-cols-2 gap-4">
+    <div className="container mx-auto w-full mb-4 p-4 border border-black grid grid-cols-2 gap-4">
       <div className="flex flex-col text-center justify-center">
         <h2 className="mb-1">Average time to finish tasks:</h2>
         <p>22:15 minutes</p>
