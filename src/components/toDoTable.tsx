@@ -45,7 +45,34 @@ export default function ToDoTable(props: PropsToDoTable) {
   };
 
   const handleNextPrioritySortDirection = () => {
-  }
+    if (tableOptions.sortingPriority == "NONE")
+      setTableOptions((prev) => {
+        return { ...prev, sortingPriority: "ASCENDING" };
+      });
+    else if (tableOptions.sortingPriority == "ASCENDING")
+      setTableOptions((prev) => {
+        return { ...prev, sortingPriority: "DESCENDING" };
+      });
+    else
+      setTableOptions((prev) => {
+        return { ...prev, sortingPriority: "NONE" };
+      });
+  };
+
+  const handleNextDateSortDirection = () => {
+    if (tableOptions.sortingDueDate == "NONE")
+      setTableOptions((prev) => {
+        return { ...prev, sortingDueDate: "ASCENDING" };
+      });
+    else if (tableOptions.sortingDueDate == "ASCENDING")
+      setTableOptions((prev) => {
+        return { ...prev, sortingDueDate: "DESCENDING" };
+      });
+    else
+      setTableOptions((prev) => {
+        return { ...prev, sortingDueDate: "NONE" };
+      });
+  };
 
   return (
     <>
@@ -67,7 +94,8 @@ export default function ToDoTable(props: PropsToDoTable) {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-6 cursor-pointer"
+                  onClick={handleNextPrioritySortDirection}
                 >
                   <path
                     strokeLinecap="round"
@@ -84,7 +112,8 @@ export default function ToDoTable(props: PropsToDoTable) {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-6"
+                  className="size-6 cursor-pointer"
+                  onClick={handleNextDateSortDirection}
                 >
                   <path
                     strokeLinecap="round"
