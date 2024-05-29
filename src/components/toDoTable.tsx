@@ -1,15 +1,51 @@
+import { AxiosInstance } from "axios";
 import React from "react";
 
 interface PropsToDoTable {
+  axiosInstance: AxiosInstance;
   toDoArray: Array<ToDo>;
   pageQuantity: number;
   paginationPosition: number;
+  tableOptions: SearchOptions;
   setTableOptions: React.Dispatch<React.SetStateAction<SearchOptions>>;
 }
 
 export default function ToDoTable(props: PropsToDoTable) {
-  const { toDoArray, pageQuantity, paginationPosition, setTableOptions } =
-    props;
+  const {
+    axiosInstance,
+    toDoArray,
+    pageQuantity,
+    paginationPosition,
+    tableOptions,
+    setTableOptions,
+  } = props;
+
+  const updateToDo = async (
+    isDone: React.ChangeEvent<HTMLInputElement>,
+    id: number
+  ) => {
+    try {
+      if (isDone.target.checked) {
+        const response = axiosInstance
+          .post("/todos/" + id + "/done")
+          .then((response) => {
+            console.log(response.data);
+          });
+      } else {
+        const response = axiosInstance
+          .put("/todos/" + id + "/undone")
+          .then((response) => {
+            console.log(response.data);
+          });
+      }
+    } catch (error) {
+      isDone.target.checked = !isDone.target.checked;
+      console.error(error);
+    }
+  };
+
+  const handleNextPrioritySortDirection = () => {
+  }
 
   return (
     <>
@@ -18,16 +54,44 @@ export default function ToDoTable(props: PropsToDoTable) {
           <thead>
             <tr className="bg-slate-300">
               <th className="border-b-2 border-r border-black font-medium p-4 py-2 text-left">
-                <input type="checkbox" name="" id="" />
+                <input type="checkbox" disabled />
               </th>
               <th className="border-b-2 border-r border-black font-medium p-4 py-2 text-left">
                 Name
               </th>
               <th className="border-b-2 border-r border-black font-medium p-4 py-2 text-left">
                 Priority
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
               </th>
               <th className="border-b-2 border-r border-black font-medium p-4 py-2 text-left">
                 Due Date
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5"
+                  />
+                </svg>
               </th>
               <th className="border-b-2 border-r border-black font-medium p-4 py-2 text-left">
                 Actions
@@ -38,11 +102,16 @@ export default function ToDoTable(props: PropsToDoTable) {
             {toDoArray.map((toDo, index) => (
               <tr key={index}>
                 <td className="border border-black p-4 py-2">
-                  <input type="checkbox" checked={toDo.isDone} />
+                  <input
+                    type="checkbox"
+                    defaultChecked={toDo.isDone}
+                    onChange={(e) => updateToDo(e, toDo.id)}
+                  />
                 </td>
                 <td className="border border-black p-4 py-2">{toDo.name}</td>
                 <td className="border border-black p-4 py-2">
-                  {toDo.priority}
+                  {toDo.priority.charAt(0) +
+                    toDo.priority.substring(1).toLowerCase()}
                 </td>
                 <td className="border border-black p-4 py-2">
                   {toDo.dueDate != null

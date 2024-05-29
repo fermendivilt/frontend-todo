@@ -25,7 +25,7 @@ export default function Home() {
   });
   const [pageQuantity, setPageQuantity] = useState(1);
   const [isLoading, setLoading] = useState(true);
-
+ 
   const fetchToDoList = async () => {
     try {
       const response = axiosInstance
@@ -79,14 +79,19 @@ export default function Home() {
   if (isLoading) return <p>Loading...</p>;
   return (
     <main className="flex min-h-screen flex-col items-start justify-start py-12 px-24">
-      <Searchbar />
+      <Searchbar 
+        globalOptions={listOptions}
+        setGlobalOptions={setListOptions}
+      />
 
       <NewToDo axiosInstance={axiosInstance} appendToDo={fetchToDoList} />
 
       <ToDoTable
+        axiosInstance={axiosInstance}
         toDoArray={toDoList}
         pageQuantity={pageQuantity}
         paginationPosition={listOptions.pageNumber}
+        tableOptions={listOptions}
         setTableOptions={setListOptions}
       />
 
