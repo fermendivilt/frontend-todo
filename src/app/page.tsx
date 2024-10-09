@@ -5,9 +5,10 @@ import ToDoTable from "@/components/toDoTable";
 import NewToDo from "@/components/newToDo";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import env from "@/utils/env";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:9090",
+  baseURL: env.API_URL,
   headers: {
     "Content-Type": "application/json",
   },

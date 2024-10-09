@@ -1,3 +1,4 @@
+import env from '../utils/env'; // Ensure this import is at the top
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
