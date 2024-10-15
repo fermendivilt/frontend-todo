@@ -1,9 +1,10 @@
-import env from '../utils/env'; // Ensure this import is at the top
+import env from '../utils/env'; // Environment checker; do not remove
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+env
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -53,30 +53,6 @@ export default function Home() {
     }
   }, [listOptions]);
 
-  // const fetchToDoList = async () => {
-  //   const request = new Request("http://localhost:9090/todos", {
-  //     method: "GET",
-  //     body: JSON.stringify(listOption),
-  //   });
-
-  //   const resultBody: GetAllResponse | null = await fetch(request, {
-  //     cache: "no-store",
-  //   })
-  //     .then(async (response): Promise<GetAllResponse> => {
-  //       if (response.status === 200) {
-  //         return await response.json();;
-  //       } else {
-  //         throw new Error("Something went wrong on API server!");
-  //       }
-  //     })
-  //     .then((response) => {
-  //       console.debug(response);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-
   if (isLoading) return <p>Loading...</p>;
   return (
     <main className="flex min-h-screen flex-col items-start justify-start py-12 px-24">

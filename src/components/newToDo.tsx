@@ -1,7 +1,7 @@
 "use client";
 import { AxiosInstance } from "axios";
 import React, { useEffect, useState } from "react";
-import Swal, { SweetAlertResult } from "sweetalert2";
+import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
