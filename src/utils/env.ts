@@ -13,11 +13,11 @@ function validateEnvVariables(): EnvVariables {
 
   requiredEnvVariables.forEach((key) => {
     if (!env[key]) {
-      throw new Error(`Missing required environment variable: ${key}`);
+      console.warn(`Missing required environment variable: ${key}`);
     }
   });
 
-  return env as EnvVariables;
+  return { API_URL: env.API_URL ?? "" };
 }
 
 const env = validateEnvVariables();
