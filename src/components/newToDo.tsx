@@ -54,6 +54,7 @@ const NewToDoModal = async (props: PropsNewToDoModal): Promise<boolean> => {
     title: "New To Do",
     html: (
       <form
+        role="form"
         className="flex flex-col justify-start gap-y-2"
         onSubmit={(e) => e.preventDefault()}
       >
