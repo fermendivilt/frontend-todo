@@ -1,7 +1,7 @@
 "use client";
 import { AxiosInstance } from "axios";
 import React, { useEffect, useState } from "react";
-import Swal, { SweetAlertResult } from "sweetalert2";
+import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const MySwal = withReactContent(Swal);
@@ -54,6 +54,7 @@ const NewToDoModal = async (props: PropsNewToDoModal): Promise<boolean> => {
     title: "New To Do",
     html: (
       <form
+        role="form"
         className="flex flex-col justify-start gap-y-2"
         onSubmit={(e) => e.preventDefault()}
       >

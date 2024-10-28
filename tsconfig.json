@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["jest", "node"], // Node bc Next.js itself relies on Node.js for server-side rendering and other backend functionalities
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,

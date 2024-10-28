@@ -13,7 +13,11 @@ const axiosInstance = axios.create({
   },
 });
 
-export default function Home() {
+interface TestHome {
+  axiosInstanceTest?: typeof axiosInstance;
+}
+
+export default function Home({ axiosInstanceTest }: TestHome) {
   const [toDoList, setToDoList] = useState<Array<ToDo>>(new Array<ToDo>());
   const [listOptions, setListOptions] = useState<SearchOptions>({
     pageNumber: 1,
@@ -28,7 +32,7 @@ export default function Home() {
  
   const fetchToDoList = async () => {
     try {
-      const response = axiosInstance
+      const response = (axiosInstanceTest ?? axiosInstance)
         .get("/todos", { params: listOptions })
         .then((response) => {
           const data: GetAllResponse = response.data;
@@ -52,33 +56,9 @@ export default function Home() {
     }
   }, [listOptions]);
 
-  // const fetchToDoList = async () => {
-  //   const request = new Request("http://localhost:9090/todos", {
-  //     method: "GET",
-  //     body: JSON.stringify(listOption),
-  //   });
-
-  //   const resultBody: GetAllResponse | null = await fetch(request, {
-  //     cache: "no-store",
-  //   })
-  //     .then(async (response): Promise<GetAllResponse> => {
-  //       if (response.status === 200) {
-  //         return await response.json();;
-  //       } else {
-  //         throw new Error("Something went wrong on API server!");
-  //       }
-  //     })
-  //     .then((response) => {
-  //       console.debug(response);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // };
-
   if (isLoading) return <p>Loading...</p>;
   return (
-    <main className="flex min-h-screen flex-col items-start justify-start py-12 px-24">
+    <main role="main" className="flex min-h-screen flex-col items-start justify-start py-12 px-24">
       <Searchbar 
         globalOptions={listOptions}
         setGlobalOptions={setListOptions}
